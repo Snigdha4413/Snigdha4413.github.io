@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project | Snigdha Mishra</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,1&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%9C%A6%3C/text%3E%3C/svg%3E"></head>
+<body>
+
+<main class="wrap"><section class="chap pgrid"><div id="p"></div><div class="card cur"><canvas id="pc" role="img" aria-label="Painted art for this project"></canvas></div></section></main>
+<script src="art.js"></script><script src="projects.js"></script>
+<script>
+const id=new URLSearchParams(location.search).get('p'),p=PROJECTS.find(x=>x.id===id)||PROJECTS[0];
+document.title=p.title+' | Snigdha Mishra';
+document.getElementById('p').innerHTML=`<p class="eye">${p.tag}</p><h1 class="mid" data-sp>${p.title}</h1><div class="panel" data-r><p>${p.story}</p><ul class="stats">${p.stats.map(s=>`<li>${s}</li>`).join('')}</ul><ul class="chips">${p.stack.map(s=>`<li>${s}</li>`).join('')}</ul>${p.note?`<p style="margin-top:1em;font-size:.9rem">${p.note}</p>`:''}</div><div class="row">${(p.links||[{label:p.link?'View the project':'See it on GitHub',url:p.link||GH}]).map(l=>`<a class="btn" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('')}<a class="btn ghost" href="index.html#projects">Back to projects</a></div>`;
+Art.render(pc,p.pal,p.seed,540,720);Art.page();
+</script></body></html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Community | Snigdha Mishra</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,1&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%9C%A6%3C/text%3E%3C/svg%3E"></head>
+<body>
+
+<main class="wrap"><section class="chap"><h1 class="mid" data-sp>Community</h1>
+<div class="show" id="show" aria-roledescription="carousel" aria-label="Community photos"><div class="cap"><h3 id="ct"></h3><p id="cd"></p></div></div>
+<div class="ctrl"><button id="pv" aria-label="Previous photo">‹</button><span id="dots"></span><button id="nx" aria-label="Next photo">›</button><button id="pp" aria-label="Pause slideshow">❚❚</button></div>
+<div class="roles">
+<div class="panel" data-r><p class="w">2026 to now</p><h3>President, Research and Development</h3><p>Data Mavericks X NSDC. Leading a team of 7 and serving as Chief Editor of the data science newsletter.</p></div>
+<div class="panel" data-r><p class="w">2026</p><h3>Head of Media</h3><p>Google Developer Group, NMIMS. Co-leading content, design and social media across events, producing posters and announcements, and running team onboarding.</p></div>
+<div class="panel" data-r><p class="w">2023</p><h3>External Management Member</h3><p>IETE-SF. Secured 2 in-kind sponsorships, including coupon partnerships with brands such as Domino's and Subway.</p></div>
+</div></section></main>
+<script src="art.js"></script>
+<script>
+/* Add your photos to the photos/ folder, then edit this list. Until a file exists, a painted slide shows instead. */
+const SLIDES=[
+ {src:'photos/gdg-1.jpg',t:'GDG NMIMS',d:'The GDG team at a campus event'},
+ {src:'photos/community-1.jpg',t:'Community service',d:'Hand-painted classroom posters: Computer Lab, Phonetics and Prepositions'},
+ {src:'photos/community-2.jpg',t:'Community service',d:'Children arranging alphabet cards on the floor'}
+ /* Add these back once you have photos:
+ ,{src:'photos/data-mavericks-1.jpg',t:'Data Mavericks X NSDC',d:'The research and development team'}
+ ,{src:'photos/iete-1.jpg',t:'IETE-SF',d:'Sponsorship and event management'} */
+];
+const show=document.getElementById('show'),dots=document.getElementById('dots'),pals=Object.values(Art.P),n=SLIDES.length;
+const track=document.createElement('div');track.className='track';show.prepend(track);
+let cur=0,timer,playing=true;
+SLIDES.forEach((s,i)=>{const d=document.createElement('div');d.className='slide';
+ const c=document.createElement('canvas');Art.render(c,pals[i%pals.length],i+50,720,450);d.appendChild(c);
+ const im=new Image();im.alt=s.t+': '+s.d;im.src=s.src;im.onerror=()=>im.remove();d.appendChild(im);track.appendChild(d);
+ const b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Photo '+(i+1));b.onclick=()=>go(i,1);dots.appendChild(b)});
+function go(i,manual){cur=(i+n)%n;track.style.transform='translateX(-'+cur*100+'%)';
+ [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===cur));ct.textContent=SLIDES[cur].t;cd.textContent=SLIDES[cur].d;if(manual)play()}
+function play(){clearInterval(timer);if(playing)timer=setInterval(()=>go(cur+1),4000)}
+pv.onclick=()=>go(cur-1,1);nx.onclick=()=>go(cur+1,1);
+pp.onclick=()=>{playing=!playing;pp.textContent=playing?'❚❚':'▶';pp.setAttribute('aria-label',playing?'Pause slideshow':'Play slideshow');play()};
+show.onmouseenter=()=>clearInterval(timer);show.onmouseleave=play;
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(cur-1,1);if(e.key==='ArrowRight')go(cur+1,1)});
+go(0);play();Art.page();
+</script></body></html>
