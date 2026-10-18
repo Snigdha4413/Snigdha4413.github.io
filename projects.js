@@ -16,7 +16,7 @@ const PROJECTS = [
     pal: ['#f6d55c','#ff9a6b','#ee6f9f','#7a3fb0','#fff6d0'], stack: ['JavaScript','Chart.js'],
     blurb: 'Listening history as four states: Library, Discovery, Ad and Offline.',
     story: 'Streaming history modelled as a 4-state Markov chain (Library, Discovery, Ad, Offline). It computes transition matrices and stationary distributions, then checks them with Monte Carlo simulation. Absorbing-chain analysis estimates expected session length and ad exposure, with an ad-frequency sensitivity model and a multi-user benchmark.',
-    stats: ['4 states, stationary distribution verified by simulation'], note: '', link: '' },
+    stats: ['4 states, stationary distribution verified by simulation'], note: '', links: [{ label: 'View on GitHub', url: 'https://github.com/Snigdha4413/Spotify-Markov-Chain-' }] },
   { id: 'survey-analysis', title: 'Survey Data, Decoded', tag: 'Statistics', seed: 41,
     pal: ['#9be0d0','#4fb8c0','#1f6fa8','#2b3aa8','#ffe9a0'], stack: ['Python','Pandas','Statsmodels','Streamlit'],
     blurb: 'Real survey data, cleaned and tested, then packaged as an interactive app.',
